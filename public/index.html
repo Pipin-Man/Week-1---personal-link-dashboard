@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PipinMan Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <aside class="left-sidebar panel-card">
+        <h1>PipinMan's<br />dashboard</h1>
+        <p id="clock" class="muted"></p>
+
+        <button id="open-panel-dialog" class="icon-button" type="button">⊕ Add panel</button>
+        <ul id="panel-list" class="panel-list"></ul>
+
+        <p class="theme-hint">light / dark / system</p>
+      </aside>
+
+      <section class="center-column panel-card">
+        <form id="search-form" class="search-row">
+          <input id="search-input" placeholder="Search links from all panels and categories" />
+          <button class="icon-button" type="submit">⌕ Search</button>
+        </form>
+        <div id="search-results" class="search-results hidden"></div>
+
+        <section class="add-category-inline">
+          <div class="section-title-row">
+            <h2>Categories</h2>
+            <button id="open-category-dialog" class="icon-button" type="button">⊕ Add category</button>
+          </div>
+        </section>
+
+        <section id="panel-content"></section>
+      </section>
+
+      <aside class="right-sidebar panel-card">
+        <h2>Notes</h2>
+        <form id="note-form" class="stack-row">
+          <textarea id="note-content" placeholder="note space" rows="5" required></textarea>
+          <button class="icon-button" type="submit">⊕ Add note</button>
+        </form>
+        <ul id="notes-list" class="notes-list"></ul>
+      </aside>
+    </main>
+
+    <dialog id="panel-dialog">
+      <form id="panel-form" method="dialog" class="dialog-form">
+        <h3>Add panel</h3>
+        <label>
+          Name
+          <input id="panel-name" placeholder="panel name" required />
+        </label>
+        <div class="dialog-actions">
+          <button class="icon-button" type="submit">✓ Save</button>
+          <button type="button" class="icon-button" id="cancel-panel-dialog">✕ Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="category-dialog">
+      <form id="category-form" method="dialog" class="dialog-form">
+        <h3>Add category</h3>
+        <label>
+          Panel
+          <select id="category-panel" required></select>
+        </label>
+        <label>
+          Name
+          <input id="category-name" placeholder="Category Name" required />
+        </label>
+        <div class="dialog-actions">
+          <button class="icon-button" type="submit">✓ Save</button>
+          <button type="button" class="icon-button" id="cancel-category-dialog">✕ Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="link-dialog">
+      <form id="link-form" method="dialog" class="dialog-form">
+        <h3 id="link-dialog-title">Add link</h3>
+        <input type="hidden" id="link-id" />
+        <label>
+          Category
+          <select id="link-category" required></select>
+        </label>
+        <label>
+          Link name
+          <input id="link-name" required />
+        </label>
+        <label>
+          Link URL
+          <input id="link-url" type="url" required placeholder="https://..." />
+        </label>
+        <label>
+          Description
+          <textarea id="link-description" rows="3" placeholder="small description"></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button class="icon-button" type="submit">✓ Save</button>
+          <button type="button" class="icon-button" id="cancel-link-dialog">✕ Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="category-template">
+      <article class="category-block">
+        <header class="category-header">
+          <h3 class="category-name"></h3>
+          <div class="category-actions">
+            <button class="add-link icon-button" type="button">⊕ Add link</button>
+            <button class="delete-category icon-button" type="button">✕ Del category</button>
+          </div>
+        </header>
+        <ul class="links-list"></ul>
+      </article>
+    </template>
+
+    <template id="link-template">
+      <li class="link-item">
+        <div>
+          <a class="link-anchor" target="_blank" rel="noreferrer"></a>
+          <p class="link-description"></p>
+        </div>
+        <div class="link-actions">
+          <button class="edit-link icon-button" type="button">✎ Edit</button>
+          <button class="delete-link icon-button" type="button">✕ Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <script src="/script.js" defer></script>
+  </body>
+</html>
