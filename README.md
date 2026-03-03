@@ -31,8 +31,38 @@ Open:
 
 - http://localhost:3000
 
+## Deploy (open from anywhere)
+
+This repo now includes deployment files for **Render**.
+
+### Option A: One-click-ish with `render.yaml`
+
+1. Push this repository to GitHub.
+2. In Render: **New +** → **Blueprint**.
+3. Select your repo.
+4. Render will detect `render.yaml` and create the web service.
+5. After deploy, open your public `https://<service>.onrender.com` URL.
+
+### Option B: Docker deploy manually
+
+- `Dockerfile` is included.
+- Any host that supports Docker (Render, Fly.io, Railway, VPS) can run:
+
+```bash
+docker build -t personal-link-dashboard .
+docker run -p 3000:3000 personal-link-dashboard
+```
+
+Then open `http://localhost:3000`.
+
+## Important note about persistence
+
+On free cloud instances, local SQLite disk may reset on redeploy/restart depending on provider settings.
+For reliable long-term data, move DB to managed Postgres/MySQL or attach persistent volume.
+
 ## API endpoints
 
+- `GET /healthz`
 - `GET /api/dashboard`
 - `GET /api/search?q=term`
 - `POST /api/panels`

@@ -137,6 +137,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
+        if parsed.path == '/healthz':
+            json_response(self, 200, {'status': 'ok'})
+            return
         if parsed.path == '/api/dashboard':
             self.get_dashboard()
             return
